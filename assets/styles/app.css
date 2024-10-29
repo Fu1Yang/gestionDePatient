@@ -1,3 +1,86 @@
-body {
-    background-color: skyblue;
+#header {
+    display: flex;
+    justify-content: space-between;
+}
+#head  {
+    width: 259px;
+    height: 313px;
+    margin-right: 5%;
+}
+#logoAdresse {
+    display: flex;
+   width: 369px;
+   height: 350px;
+}
+#logoAdresse ul {
+    margin-top: 10%;
+
+}
+#logoAdresse ul li {
+    list-style: none;
+    width: 394px;
+    font-weight: bold;
+}
+#para {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#para p {
+    width: 850px;
+    height: 54px;
+    text-align: justify;
+}
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+form fieldset{
+    width: 546px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+form label {
+    margin-top: 50px;
+    font-size: 20px;
+    font-weight: bold;
+}
+form input {
+    height: 30px;
+   
+}
+form input:hover {
+    box-shadow: 12px 12px 2px 1px rgb(0, 0, 0);
+}
+form button {
+    width: 105px;
+    margin-left: 80.5%;
+    margin-top: 1%;
+}
+form button:hover {
+    box-shadow: 12px 12px 2px 1px rgb(132, 119, 119);
+    background: rgb(0, 255, 34);
+}
+form a {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+footer {
+    border-top: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10%;
+    height: 24px;
+}
+footer a {
+    text-decoration: none;
+    color: black;
 }
