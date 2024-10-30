@@ -29,10 +29,10 @@ const App = () => {
     
     <Form></Form>
     <footer>
-        <h2>copyright Maurice Olivier</h2>
+        <h4>copyright Maurice Olivier</h4>
           <a href='#'>Condition général</a>
           <div></div>
-          </footer>
+    </footer>
     </>
 );
 

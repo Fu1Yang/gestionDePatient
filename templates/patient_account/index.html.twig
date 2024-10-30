@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PatientAccount index{% endblock %}
+
+{% block body %}
+    <h1>PatientAccount index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Genre</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Adresse</th>
+                <th>Tel</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for patient_account in patient_accounts %}
+            <tr>
+                <td>{{ patient_account.id }}</td>
+                <td>{{ patient_account.genre }}</td>
+                <td>{{ patient_account.nom }}</td>
+                <td>{{ patient_account.prenom }}</td>
+                <td>{{ patient_account.adresse }}</td>
+                <td>{{ patient_account.tel }}</td>
+                <td>{{ patient_account.email }}</td>
+                <td>
+                    <a href="{{ path('app_patient_account_show', {'id': patient_account.id}) }}">show</a>
+                    <a href="{{ path('app_patient_account_edit', {'id': patient_account.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_patient_account_new') }}">Create new</a>
+{% endblock %}
