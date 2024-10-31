@@ -1,0 +1,46 @@
+.calendar {
+    width: 769px;
+    height: auto;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  .days-of-week, .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .day-name {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .day {
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #f3f3f3;
+    transition: background-color 0.3s;
+  }
+  
+  .day:hover {
+    background-color: #ddd;
+  }
+  

@@ -20,7 +20,7 @@ final class PatientAccountController extends AbstractController
         return $this->render('patient_account/account.html.twig');
     }
 
-    #[Route('/rdv', name: 'app_patient_rdv', methods: ['GET'])]
+    #[Route('/rdv', name: 'app_patient_account_rdv', methods: ['GET'])]
     public function rdv(): Response
     {
         return $this->render('patient_account/rdv.html.twig');
