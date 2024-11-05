@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app';
 import Account from './components/account';
 import Rdv from './components/appointment';
+import Register from './components/register';
 
 
 // Vérifiez que les éléments DOM existent avant de créer les roots
 const rootElement = document.getElementById('root');
 const accountElement = document.getElementById('account');
 const rdv = document.getElementById('appointment');
+const regist = document.getElementById('register');
 
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
@@ -33,6 +35,15 @@ if (rdv) {
   appointment.render(
     <React.StrictMode>
       <Rdv/>
+    </React.StrictMode>
+  )
+}
+
+if (regist){
+  const register = ReactDOM.createRoot(regist);
+  register.render(
+    <React.StrictMode>
+      <Register/>
     </React.StrictMode>
   )
 }

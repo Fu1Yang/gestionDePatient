@@ -22,7 +22,7 @@
     height: 313px;
 }
 
-#array {
+#arrayi {
     display: flex;
     flex-direction: column;
     margin-right: 100%;
@@ -51,6 +51,9 @@
     border-radius: 10px;
 }
 .array1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 40px;
     height: 40px;
     background-color: gray;

@@ -26,6 +26,12 @@ final class PatientAccountController extends AbstractController
         return $this->render('patient_account/rdv.html.twig');
     }
 
+    #[Route('/register', name: 'app_inscription_inscrire', methods: ["GET"])]
+    public function register(): Response
+    {
+        return $this->render('inscription/inscrire.html.twig');
+    }
+
     #[Route('/index', name: 'app_patient_account_index', methods: ['GET'])]
     public function index(PatientAccountRepository $patientAccountRepository): Response
     {

@@ -17,7 +17,7 @@ const Rdv = ()=> {
                 <div id='link'>
                     <a href='#'>retour au profile</a>
                 </div>
-                <div id='array'>
+                <div id='array1'>
                     <div className='col'><p className='array1'></p><p className='pa'>ne travaile pas</p></div>
                     <div className='col'><p className='array2'></p><p className='pa'>complet</p></div>
                     <div className='col'><p className='array3'></p><p className='pa'>disponible</p></div>

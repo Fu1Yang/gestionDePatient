@@ -30,12 +30,13 @@ const Account = ()=> {
 
         <div id='table'>
          <Historic></Historic>
+         </div>
             <footer>
                 <h4>copyright Maurice Olivier</h4>
                 <a href='#'>Condition général</a>
                 <div></div>
             </footer>
-        </div>
+        
     </div>
         </>
     )
