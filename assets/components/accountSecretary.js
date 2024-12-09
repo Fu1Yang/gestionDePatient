@@ -1,6 +1,6 @@
 import '../styles/account.css';
 import React from 'react';
-import patient from '../../assets/images/patient.JPG';
+import secretaire from '../../assets/images/secretaire.PNG';
 import centre from '../../assets/images/centre.JPG';
 import Planning from "./calendrier";
 
@@ -21,7 +21,7 @@ const AccountSecret = ()=> {
                 <button>Inscrire un nouveau patient</button>
             </div>
             <div id='photo'>
-                <img src={patient} />
+                <img src={secretaire} />
             </div>
         </div>
 
