@@ -1,0 +1,42 @@
+import '../styles/account.css';
+import React from 'react';
+import patient from '../../assets/images/patient.JPG';
+import centre from '../../assets/images/centre.JPG';
+import Planning from "./calendrier";
+
+const AccountSecret = ()=> {
+    return (
+        <>
+    <div id="colum">
+        <div id='accountPatient'>
+            <img id='head' src={centre} />
+            <div id='profile'>
+                <h1>compte: secrétaire</h1>
+                <button>Déconnexion</button>
+            </div>
+            <div id='information'>
+                <ul>
+                    <li>Bonjour Mr Yang Fu</li>
+                </ul>
+                <button>Inscrire un nouveau patient</button>
+            </div>
+            <div id='photo'>
+                <img src={patient} />
+            </div>
+        </div>
+
+        <div id='table'>
+         <Planning></Planning>
+         </div>
+            <footer>
+                <h4>copyright Maurice Olivier</h4>
+                <a href='#'>Condition général</a>
+                <div></div>
+            </footer>
+        
+    </div>
+        </>
+    )
+};
+
+export default AccountSecret;

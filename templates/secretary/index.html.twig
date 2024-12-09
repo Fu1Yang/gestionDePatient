@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Secretary index{% endblock %}
+
+{% block body %}
+    <h1>Secretary index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Genre</th>
+                <th>Name</th>
+                <th>Firstname</th>
+                <th>Adresse</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for secretary in secretaries %}
+            <tr>
+                <td>{{ secretary.id }}</td>
+                <td>{{ secretary.genre }}</td>
+                <td>{{ secretary.name }}</td>
+                <td>{{ secretary.firstname }}</td>
+                <td>{{ secretary.adresse }}</td>
+                <td>{{ secretary.phone }}</td>
+                <td>{{ secretary.email }}</td>
+                <td>
+                    <a href="{{ path('app_secretary_show', {'id': secretary.id}) }}">show</a>
+                    <a href="{{ path('app_secretary_edit', {'id': secretary.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_secretary_new') }}">Create new</a>
+{% endblock %}
