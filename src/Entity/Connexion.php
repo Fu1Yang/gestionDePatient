@@ -19,6 +19,9 @@ class Connexion
     #[ORM\Column(length: 255)]
     private ?string $passworduser = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $role = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Connexion
     public function setPassworduser(string $passworduser): static
     {
         $this->passworduser = $passworduser;
+
+        return $this;
+    }
+
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(string $role): static
+    {
+        $this->role = $role;
 
         return $this;
     }

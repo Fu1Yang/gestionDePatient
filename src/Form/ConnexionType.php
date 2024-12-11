@@ -14,6 +14,7 @@ class ConnexionType extends AbstractType
         $builder
             ->add('idUser')
             ->add('passworduser')
+            ->add('role')
         ;
     }
 

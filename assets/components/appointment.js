@@ -7,6 +7,7 @@ import patient from '../../assets/images/patient.JPG';
 
 
 const Rdv = ()=> {
+    const returnProfile = '/patient/account/';
     return (
         <>
         <div id='logo'>
@@ -15,7 +16,7 @@ const Rdv = ()=> {
             </div>
             <div id='available'>
                 <div id='link'>
-                    <a href='#'>retour au profile</a>
+                    <a href={returnProfile}>retour au profile</a>
                 </div>
                 <div id='array1'>
                     <div className='col'><p className='array1'></p><p className='pa'>ne travaile pas</p></div>

@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 #[Route('/')]
 final class ConnexionController extends AbstractController
@@ -19,6 +21,57 @@ final class ConnexionController extends AbstractController
     {
         return $this->render('connexion/connexion.html.twig');
     }
+
+    #[Route('/verification', name: 'app_connexion_verification', methods: ['POST'])]
+    public function verification(Request $request, ConnexionRepository $connexionRepository): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+        if (!isset($data['idUser']) || !isset($data['passworduser'])) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Identifiant ou mot de passe manquant',
+            ], 400);
+        }
+    
+        $idUser = $data['idUser'];
+        $password = $data['passworduser'];
+    
+        $user = $connexionRepository->findOneBy(['idUser' => $idUser]);
+    
+        if (!$user) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Utilisateur introuvable',
+            ], 404);
+        }
+    
+        if ($user->getPassworduser() !== $password) {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Mot de passe incorrect',
+            ], 401);
+        }
+        
+        if ($user->getPassworduser() == $password && $user->getIdUser()== $idUser) {
+            if ($user->getRole() === 'secretary') {
+                return new JsonResponse([
+                    'status' => 'success',
+                    'message' => 'Connexion réussie',
+                    'redirectUrl' => '/secretary/account', // Indique l'URL vers laquelle rediriger l'utilisateur
+                ]);
+            }
+            if ($user->getRole() === 'patient') {
+                return new JsonResponse([
+                    'status' => 'success',
+                    'message' => 'Connexion réussie',
+                    'redirectUrl' => '/patient/account', // Indique l'URL vers laquelle rediriger l'utilisateur
+
+                ]);
+            }
+       
+        }
+    }
+    
 
     #[Route('/index', name: 'app_connexion_index', methods: ['GET'])]
     public function index(ConnexionRepository $connexionRepository): Response

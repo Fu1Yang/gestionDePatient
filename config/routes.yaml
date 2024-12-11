@@ -3,3 +3,10 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+    
+cors_preflight:
+    path: /{path}
+    methods: OPTIONS
+    defaults: { _controller: 'Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction' }
+    requirements:
+        path: .*

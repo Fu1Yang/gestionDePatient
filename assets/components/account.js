@@ -5,6 +5,8 @@ import centre from '../../assets/images/centre.JPG';
 import Historic from "./historic";
 
 const Account = ()=> {
+    const patients = '/patient/account/rdv';
+    const informations = '/patient/account/rdv';
     return (
         <>
     <div id="colum">
@@ -21,7 +23,8 @@ const Account = ()=> {
                     <li>Tel: 06.60.75.23.22</li>
                     <li>Email: yang.fu@live.fr</li>
                 </ul>
-                <button>Prendre un rendez-vous</button>
+                <button><a href={patients}>Modifier mes informations</a></button>
+                <button><a href={patients}>Prendre un rendez-vous</a></button>
             </div>
             <div id='photo'>
                 <img src={patient} />
