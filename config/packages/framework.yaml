@@ -1,16 +1,23 @@
-# see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
     secret: '%env(APP_SECRET)%'
     #csrf_protection: true
 
     # Note that the session will be started ONLY if you read or write from it.
-    session: true
-
-    #esi: true
-    #fragments: true
+    session:
+        handler_id: null   # Utilise le gestionnaire de session par défaut
+        cookie_lifetime: 3600  # Durée de vie du cookie (en secondes)
+        cookie_secure: auto    # Paramètre pour envoyer le cookie en HTTPS
+        cookie_httponly: true  # Empêche l'accès au cookie via JavaScript
+        cookie_path: '/'       # Le chemin pour lequel le cookie est valide
+        cookie_samesite: 'lax' # Contrôle l'envoi des cookies dans les requêtes inter-domaines
+        gc_maxlifetime: 3600   # Durée de vie maximale des sessions en secondes
+        gc_probability: 1      # Probabilité que le ramasse-miettes des sessions soit activé
+        gc_divisor: 1000       # Diviseur utilisé pour calculer la probabilité de nettoyage des sessions
+        save_path: '%kernel.cache_dir%/sessions' # Dossier où les sessions sont stockées (par défaut : var/sessions)
+        storage_factory_id: session.storage.factory.native  # Utilisation du stockage natif de session PHP
 
 when@test:
     framework:
         test: true
         session:
-            storage_factory_id: session.storage.factory.mock_file
+            storage_factory_id: session.storage.factory.mock_file  # Simule le stockage pour les tests

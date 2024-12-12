@@ -6,43 +6,47 @@ import Form from "./form";
 
 const App = () => {
     const [errorMessage, setErrorMessage] = useState('');
-
+    const [secretaryName, setSecretaryName] = useState('');
+    
     const handleSubmit = async (e) => {
         e.preventDefault(); // Empêche le rechargement de la page
-
+    
         const formData = new FormData(e.target);
         const data = {
-            idUser: formData.get('identifiant'), // Correspond à `name="identifiant"`
-            passworduser: formData.get('password') // Correspond à `name="password"`
+            idUser: formData.get('identifiant'),
+            passworduser: formData.get('password')
         };
-
+    
         try {
-            const response = await fetch("http://localhost:8000/verification", { // Remplacez par l'URL appropriée
+            const response = await fetch("http://localhost:8000/verification", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data) // Convertit l'objet en JSON
+                body: JSON.stringify(data)
             });
-
+    
             const result = await response.json();
-
+    
             if (!response.ok) {
-                // Affiche l'erreur si la réponse HTTP indique une erreur
                 setErrorMessage(result.message || 'Une erreur est survenue');
             } else {
                 console.log('Connexion réussie :', result);
                 setErrorMessage(''); // Réinitialise le message d'erreur
-                if (result.redirectUrl) {
-                    window.location.href = result.redirectUrl; // Redirige vers l'URL fournie dans la réponse
+                if (result.userInfo) {
+                    // Met à jour l'état avec toutes les informations de l'utilisateur
+                    setSecretaryName(result.userInfo.secretaryName); // Récupère le nom de la secrétaire
+                    // Enregistre les autres informations dans l'état ou dans le localStorage si nécessaire
+                    localStorage.setItem('userInfo', JSON.stringify(result.userInfo));
                 }
-
+                window.location.href = result.redirectUrl; // Redirige vers l'URL fournie dans la réponse
             }
         } catch (error) {
             console.error('Erreur lors de la requête :', error);
             setErrorMessage('Une erreur de connexion est survenue.');
         }
     };
+    
 
     return (
         <>

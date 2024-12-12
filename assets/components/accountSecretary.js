@@ -16,7 +16,7 @@ const AccountSecret = ()=> {
             </div>
             <div id='information'>
                 <ul>
-                    <li>Bonjour Mr Yang Fu</li>
+                    <li>Bonjour Mr Céline Grande Dent</li>
                 </ul>
                 <button>Inscrire un nouveau patient</button>
             </div>

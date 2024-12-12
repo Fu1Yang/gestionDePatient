@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SecretaryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SecretaryRepository::class)]
@@ -30,6 +32,17 @@ class Secretary
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
+
+    /**
+     * @var Collection<int, Connexion>
+     */
+    #[ORM\OneToMany(targetEntity: Connexion::class, mappedBy: 'secretary')]
+    private Collection $connexion;
+
+    public function __construct()
+    {
+        $this->connexion = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +117,36 @@ class Secretary
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Connexion>
+     */
+    public function getConnexion(): Collection
+    {
+        return $this->connexion;
+    }
+
+    public function addConnexion(Connexion $connexion): static
+    {
+        if (!$this->connexion->contains($connexion)) {
+            $this->connexion->add($connexion);
+            $connexion->setSecretary($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConnexion(Connexion $connexion): static
+    {
+        if ($this->connexion->removeElement($connexion)) {
+            // set the owning side to null (unless already changed)
+            if ($connexion->getSecretary() === $this) {
+                $connexion->setSecretary(null);
+            }
+        }
 
         return $this;
     }
