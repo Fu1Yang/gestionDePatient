@@ -10,25 +10,28 @@ const App = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault(); // Empêche le rechargement de la page
-    
+        
         const formData = new FormData(e.target);
         const data = {
             idUser: formData.get('identifiant'),
             passworduser: formData.get('password')
         };
-    
+        console.log(data.idUser);
+        
         try {
-            const response = await fetch("http://localhost:8000/verification", {
+         
+            const response = await fetch("https://localhost:8000/verification", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
             });
-    
+          
             const result = await response.json();
     
             if (!response.ok) {
+            
                 setErrorMessage(result.message || 'Une erreur est survenue');
             } else {
                 console.log('Connexion réussie :', result);

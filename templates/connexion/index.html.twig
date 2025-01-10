@@ -12,6 +12,7 @@
                 <th>IdUser</th>
                 <th>Passworduser</th>
                 <th>role</th>
+                <th>secretary_id</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,7 +23,7 @@
                 <td>{{ connexion.idUser }}</td>
                 <td>{{ connexion.passworduser }}</td>
                 <td>{{ connexion.role }}</td>
-                <td>
+                <td>{{ connexion.secretary_id}}</td>
                     <a href="{{ path('app_connexion_show', {'id': connexion.id}) }}">show</a>
                     <a href="{{ path('app_connexion_edit', {'id': connexion.id}) }}">edit</a>
                 </td>

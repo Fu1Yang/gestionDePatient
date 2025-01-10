@@ -1,13 +1,27 @@
 import '../styles/account.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import secretaire from '../../assets/images/secretaire.PNG';
 import centre from '../../assets/images/centre.JPG';
 import Planning from "./calendrier";
 
+
+
+
 const AccountSecret = ()=> {
+    const [genres, setGenres] = useState([]);
+
+    useEffect(() => {
+      fetch('/api_secretary') // L'API Symfony que tu as définie
+        .then((response) => response.json())
+        .then((data) => setGenres(data)) // Les genres sont directement renvoyés en JSON
+        .catch((error) => console.error('Error fetching genres:', error));
+    }, []);
+  
+
+    
     return (
         <>
-    <div id="colum">
+    <div id="colum" >
         <div id='accountPatient'>
             <img id='head' src={centre} />
             <div id='profile'>
@@ -16,7 +30,7 @@ const AccountSecret = ()=> {
             </div>
             <div id='information'>
                 <ul>
-                    <li>Bonjour Mr Céline Grande Dent</li>
+                    <li>Bienvenue, {genres.name}!</li>
                 </ul>
                 <button>Inscrire un nouveau patient</button>
             </div>

@@ -10,13 +10,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/secretary/account')]
 final class SecretaryController extends AbstractController
 {
     #[Route('/', name: 'app_secretary_account', methods: ['GET'])]
-    public function accountSecretary( ): Response
-    {
+    public function accountSecretary(): Response
+    {  
         return $this->render('secretary/accountSecretary.html.twig');
     }
 
@@ -85,5 +86,26 @@ final class SecretaryController extends AbstractController
         return $this->redirectToRoute('app_secretary_index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/api_secretary',name: 'app_secretary_api', methods: ['GET'])]
+    public function api_secretary(Secretary $secretary): JsonResponse
+    {
+        if 
+        $genre = $secretary->getGenre();
+        $name = $secretary->getName();
+        $firstname = $secretary->getFirstname();
+        $adresse = $secretary->getAdresse();
+        $phone = $secretary->getPhone();
+        $email = $secretary->getEmail();
 
+        return new JsonResponse([
+            'genre' => $genre,
+            'name' => $name,
+            'firstname' => $firstname,
+            'adresse' => $adresse,
+            'phone' => $phone,
+            'email' => $email
+        ], 200, [
+            'Content-Type' => 'application/json'
+        ]);
+    }
 }

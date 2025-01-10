@@ -22,35 +22,35 @@ const Planning = ()=> {
                         <th scope='row'>Le 26/10/2024</th>
                         <td>09h00</td>
                         <td>Controle de routine</td>
-                        <td>tout va bien</td>
+                        <td>Tom</td>
                         <td><button>Annuler le rdv</button></td>
                     </tr>
                     <tr>
                         <th scope='row'>Le 20/11/2024</th>
                         <td>09h30</td>
                         <td>Resultat des prises de sang</td>
-                        <td>tout va bien</td>
+                        <td>Yang Fu</td>
                         <td><button>Annuler le rdv</button></td>
                     </tr>
                     <tr>
                         <th scope='row'>Le 03/03/2025</th>
                         <td>13h00</td>
-                        <td>Controle de routine</td>
-                        <td>tout va bien</td>
+                        <td>resultat colocospie</td>
+                        <td>Xiong laura</td>
                         <td><button>Annuler le rdv</button></td>
                     </tr>
                     <tr>
                         <th scope='row'>Le 15/04/2025</th>
                         <td>13h30</td>
                         <td>Controle de routine</td>
-                        <td>tout va bien</td>
+                        <td>Norbet</td>
                         <td><button>Annuler le rdv</button></td>
                     </tr>
                     <tr>
                         <th scope='row'>Le 30/10/2025</th>
                         <td>14h20</td>
-                        <td>Controle de routine</td>
-                        <td>tout va bien</td>
+                        <td>Controle vaginal</td>
+                        <td>Lana coxx</td>
                         <td><button>Annuler le rdv</button></td>
                     </tr>
                 </tbody>

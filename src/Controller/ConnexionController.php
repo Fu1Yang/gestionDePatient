@@ -22,9 +22,10 @@ final class ConnexionController extends AbstractController
         return $this->render('connexion/connexion.html.twig');
     }
 
-    #[Route('/verification', name: 'app_connexion_verification', methods: ['POST'])]
+    #[Route('/verification', name: 'app_connexion_verification', methods: ['GET', 'POST'])]
     public function verification(Request $request, ConnexionRepository $connexionRepository): JsonResponse
     {
+    
         $data = json_decode($request->getContent(), true);
         if (!isset($data['idUser']) || !isset($data['passworduser'])) {
             return new JsonResponse([

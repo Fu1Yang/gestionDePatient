@@ -27,6 +27,9 @@ class Connexion implements UserInterface
     #[ORM\ManyToOne(inversedBy: 'connexion')]
     private ?Secretary $secretary = null;
 
+    #[ORM\Column]
+    private ?int $secretary_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +99,18 @@ class Connexion implements UserInterface
     public function setSecretary(?Secretary $secretary): static
     {
         $this->secretary = $secretary;
+
+        return $this;
+    }
+
+    public function getSecretaryId(): ?int
+    {
+        return $this->secretary_id;
+    }
+
+    public function setSecretaryId(int $secretary_id): static
+    {
+        $this->secretary_id = $secretary_id;
 
         return $this;
     }
