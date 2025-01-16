@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Entity\PatientAccount;
 use App\Form\PatientAccountType;
 use App\Repository\PatientAccountRepository;
@@ -26,11 +26,43 @@ final class PatientAccountController extends AbstractController
         return $this->render('patient_account/rdv.html.twig');
     }
 
-    #[Route('/register', name: 'app_inscription_inscrire', methods: ["GET"])]
-    public function register(): Response
+    #[Route('/newPatient', name: 'app_patient_account_newPatient', methods: ['POST'])]
+    public function newPatient(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
-        return $this->render('inscription/inscrire.html.twig');
+        // Décodage des données JSON
+        $data = json_decode($request->getContent(), true);
+    
+        if (!$data || !isset($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            return $this->json(['error' => 'Email invalide ou données manquantes'], 400);
+        }
+    
+        try {
+            // Création et mapping des données sur l'entité
+            $patientAccount = new PatientAccount();
+            $patientAccount->setEmail($data['email']);
+            $patientAccount->setNom($data['nom'] ?? '');
+            $patientAccount->setPrenom($data['prenom'] ?? '');
+            $patientAccount->setAdresse($data['adresse'] ?? '');
+            $patientAccount->setTel($data['tel'] ?? '');
+            $patientAccount->setGenre($data['genre'] ?? '');
+    
+            // Sauvegarde en base de données
+            $entityManager->persist($patientAccount);
+            $entityManager->flush();
+    
+            return $this->json([
+                'success' => true,
+                'message' => 'Patient enregistré avec succès',
+                'data' => [
+                    'id' => $patientAccount->getId(),
+                    'email' => $patientAccount->getEmail(),
+                ],
+            ]);
+        } catch (\Exception $e) {
+            return $this->json(['error' => 'Erreur interne : ' . $e->getMessage()], 500);
+        }
     }
+    
 
     #[Route('/index', name: 'app_patient_account_index', methods: ['GET'])]
     public function index(PatientAccountRepository $patientAccountRepository): Response

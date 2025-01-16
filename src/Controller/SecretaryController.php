@@ -86,26 +86,26 @@ final class SecretaryController extends AbstractController
         return $this->redirectToRoute('app_secretary_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/api_secretary',name: 'app_secretary_api', methods: ['GET'])]
-    public function api_secretary(Secretary $secretary): JsonResponse
-    {
-        if 
-        $genre = $secretary->getGenre();
-        $name = $secretary->getName();
-        $firstname = $secretary->getFirstname();
-        $adresse = $secretary->getAdresse();
-        $phone = $secretary->getPhone();
-        $email = $secretary->getEmail();
 
+    #[Route('/api_secretary/{id}', name: 'app_secretary_api', methods: ['GET','POST'])]
+    public function api_secretary(int $id, SecretaryRepository $secretaryRepository): JsonResponse
+    {
+        $secretary = $secretaryRepository->find($id);
+        
+        if (!$secretary) {
+            return new JsonResponse(['error' => 'Secretary not found'], 404);
+        }
+    
         return new JsonResponse([
-            'genre' => $genre,
-            'name' => $name,
-            'firstname' => $firstname,
-            'adresse' => $adresse,
-            'phone' => $phone,
-            'email' => $email
-        ], 200, [
-            'Content-Type' => 'application/json'
-        ]);
+            'data' => [
+                'genre' => $secretary->getGenre(),
+                'name' => $secretary->getName(),
+                'firstname' => $secretary->getFirstname(),
+                'adresse' => $secretary->getAdresse(),
+                'phone' => $secretary->getPhone(),
+                'email' => $secretary->getEmail(),
+            ]
+        ], 200, ['Content-Type' => 'application/json']);
     }
+    
 }

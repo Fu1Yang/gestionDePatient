@@ -4,21 +4,37 @@ import secretaire from '../../assets/images/secretaire.PNG';
 import centre from '../../assets/images/centre.JPG';
 import Planning from "./calendrier";
 
-
-
-
-const AccountSecret = ()=> {
-    const [genres, setGenres] = useState([]);
+const AccountSecret = () => {
+    const [secretary, setSecretary] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-      fetch('/api_secretary') // L'API Symfony que tu as définie
-        .then((response) => response.json())
-        .then((data) => setGenres(data)) // Les genres sont directement renvoyés en JSON
-        .catch((error) => console.error('Error fetching genres:', error));
+        // Remplace l'ID par le bon ID du secrétaire à récupérer
+        const secretaryId = 1; // Exemple d'ID
+        fetch(`https://localhost:8000/secretary/account/api_secretary/${secretaryId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    setError(data.error);
+                } else {
+                    setSecretary(data);               
+                }
+            })
+            .catch(err => {
+                setError('Erreur lors de la récupération des données');
+            });
     }, []);
-  
 
-    
+
+
+    if (error) {
+        return <div>{error}</div>;
+    }
+
+    if (!secretary) {
+
+        return <div>Loading...</div>;
+    }
     return (
         <>
     <div id="colum" >
@@ -29,10 +45,12 @@ const AccountSecret = ()=> {
                 <button>Déconnexion</button>
             </div>
             <div id='information'>
-                <ul>
-                    <li>Bienvenue, {genres.name}!</li>
-                </ul>
-                <button>Inscrire un nouveau patient</button>
+                <h2>Bienvenue</h2>
+                <p>{secretary.data['genre']} {secretary.data['firstname']} {secretary.data['name']}!</p>
+                <p>Adresse: {secretary.data['adresse']}</p>
+                <p>Email: {secretary.data['email']}</p>
+                <p>Telephone: {secretary.data['phone']}</p>
+                <button><a href='/registration'>Inscrire un nouveau patient</a></button>
             </div>
             <div id='photo'>
                 <img src={secretaire} />

@@ -22,6 +22,12 @@ final class ConnexionController extends AbstractController
         return $this->render('connexion/connexion.html.twig');
     }
 
+    #[Route('/registration', name: 'app_connexion_registration', methods: ['GET','POST'])]
+    public function registration(): Response
+    {
+        return $this->render("connexion/inscrire.html.twig");
+    }
+    
     #[Route('/verification', name: 'app_connexion_verification', methods: ['GET', 'POST'])]
     public function verification(Request $request, ConnexionRepository $connexionRepository): JsonResponse
     {
@@ -36,7 +42,7 @@ final class ConnexionController extends AbstractController
     
         $idUser = $data['idUser'];
         $password = $data['passworduser'];
-    
+        
         $user = $connexionRepository->findOneBy(['idUser' => $idUser]);
     
         if (!$user) {
@@ -54,6 +60,7 @@ final class ConnexionController extends AbstractController
         }
         
         if ($user->getPassworduser() == $password && $user->getIdUser()== $idUser) {
+            
             if ($user->getRole() === 'secretary') {
                 return new JsonResponse([
                     'status' => 'success',
@@ -138,4 +145,6 @@ final class ConnexionController extends AbstractController
 
         return $this->redirectToRoute('app_connexion_index', [], Response::HTTP_SEE_OTHER);
     }
+    
+
 }
