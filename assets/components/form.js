@@ -7,10 +7,10 @@ const Form = ({handleSubmit})=>{
         <form onSubmit={handleSubmit}>
         <fieldset>
             <label>Identifiant</label>
-            <input type="text" name="identifiant" id="identifiant" placeholder="Name" required/>
+            <input type="text" name="identifiant" id="identifiant" placeholder="Name" required autoComplete="id"/>
     
             <label>mot de passe</label>
-            <input type="password" name="password" id="password" placeholder="mot de passe" required/>
+            <input type="password" name="password" id="password" placeholder="mot de passe" required autoComplete="new-password"/>
             
             <button type="submit">Se Connecter</button>
         </fieldset>

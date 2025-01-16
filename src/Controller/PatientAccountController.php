@@ -128,4 +128,26 @@ final class PatientAccountController extends AbstractController
 
         return $this->redirectToRoute('app_patient_account_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/api_patient/{id}', name: 'app_patient_api', methods: ['GET','POST'])]
+    public function api_secretary(int $id, PatientAccountRepository $patientAccountRepository): JsonResponse
+    {
+        $patient = $patientAccountRepository->find($id);
+        
+        if (!$patient) {
+            return new JsonResponse(['error' => 'Secretary not found'], 404);
+        }
+    
+        return new JsonResponse([
+            'data' => [
+                'id' => $patient->getId(),
+                'genre' => $patient->getGenre(),
+                'name' => $patient->getNom(),
+                'firstname' => $patient->getPrenom(),
+                'adresse' => $patient->getAdresse(),
+                'phone' => $patient->getTel(),
+                'email' => $patient->getEmail(),
+            ]
+        ], 200, ['Content-Type' => 'application/json']);
+    }
 }

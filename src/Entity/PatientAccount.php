@@ -31,6 +31,9 @@ class PatientAccount
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[ORM\ManyToOne(inversedBy: 'patient_id')]
+    private ?Connexion $connexion = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +107,18 @@ class PatientAccount
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getConnexion(): ?Connexion
+    {
+        return $this->connexion;
+    }
+
+    public function setConnexion(?Connexion $connexion): static
+    {
+        $this->connexion = $connexion;
 
         return $this;
     }

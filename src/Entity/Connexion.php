@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ConnexionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,6 +31,17 @@ class Connexion implements UserInterface
 
     #[ORM\Column]
     private ?int $secretary_id = null;
+
+    /**
+     * @var Collection<int, PatientAccount>
+     */
+    #[ORM\OneToMany(targetEntity: PatientAccount::class, mappedBy: 'connexion')]
+    private Collection $patient_id;
+
+    public function __construct()
+    {
+        $this->patient_id = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -111,6 +124,36 @@ class Connexion implements UserInterface
     public function setSecretaryId(int $secretary_id): static
     {
         $this->secretary_id = $secretary_id;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PatientAccount>
+     */
+    public function getPatientId(): Collection
+    {
+        return $this->patient_id;
+    }
+
+    public function addPatientId(PatientAccount $patientId): static
+    {
+        if (!$this->patient_id->contains($patientId)) {
+            $this->patient_id->add($patientId);
+            $patientId->setConnexion($this);
+        }
+
+        return $this;
+    }
+
+    public function removePatientId(PatientAccount $patientId): static
+    {
+        if ($this->patient_id->removeElement($patientId)) {
+            // set the owning side to null (unless already changed)
+            if ($patientId->getConnexion() === $this) {
+                $patientId->setConnexion(null);
+            }
+        }
 
         return $this;
     }

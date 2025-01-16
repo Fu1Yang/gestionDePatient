@@ -51,6 +51,7 @@ const AccountSecret = () => {
                 <p>Email: {secretary.data['email']}</p>
                 <p>Telephone: {secretary.data['phone']}</p>
                 <button><a href='/registration'>Inscrire un nouveau patient</a></button>
+                <button><a href='/new'>Identifiant et mot de passe temporaire</a></button>
             </div>
             <div id='photo'>
                 <img src={secretaire} />
