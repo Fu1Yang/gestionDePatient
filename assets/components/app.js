@@ -35,6 +35,8 @@ const App = () => {
                 setErrorMessage(result.message || 'Une erreur est survenue');
             } else {
                 console.log('Connexion réussie :', result);
+                console.log('Connexion réussie :', result.id);
+                localStorage.setItem('userId', result.id);
                 setErrorMessage(''); // Réinitialise le message d'erreur
                 if (result.userInfo) {
                     // Met à jour l'état avec toutes les informations de l'utilisateur
@@ -46,7 +48,7 @@ const App = () => {
             }
         } catch (error) {
             console.error('Erreur lors de la requête :', error);
-            setErrorMessage('Une erreur de connexion est survenue.');
+            setErrorMessage('Une erreur de connexion est survenue cote basse de donnèe.');
         }
     };
     

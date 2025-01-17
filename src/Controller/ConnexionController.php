@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Repository\PatientAccountRepository;
 
 #[Route('/')]
 final class ConnexionController extends AbstractController
@@ -29,7 +29,7 @@ final class ConnexionController extends AbstractController
     }
     
     #[Route('/verification', name: 'app_connexion_verification', methods: ['GET', 'POST'])]
-    public function verification(Request $request, ConnexionRepository $connexionRepository): JsonResponse
+    public function verification(Request $request, ConnexionRepository $connexionRepository, PatientAccountRepository $patientAccountRepository): JsonResponse
     {
     
         $data = json_decode($request->getContent(), true);
@@ -65,13 +65,16 @@ final class ConnexionController extends AbstractController
                 return new JsonResponse([
                     'status' => 'success',
                     'message' => 'Connexion réussie',
+                    'id' => $user->getSecretaryId(),
                     'redirectUrl' => '/secretary/account', // Indique l'URL vers laquelle rediriger l'utilisateur
                 ]);
             }
             if ($user->getRole() === 'patient') {
+                
                 return new JsonResponse([
                     'status' => 'success',
                     'message' => 'Connexion réussie',
+                    'id' => $user->getId(),
                     'redirectUrl' => '/patient/account', // Indique l'URL vers laquelle rediriger l'utilisateur
 
                 ]);

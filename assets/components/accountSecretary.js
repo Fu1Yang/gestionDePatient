@@ -7,11 +7,14 @@ import Planning from "./calendrier";
 const AccountSecret = () => {
     const [secretary, setSecretary] = useState(null);
     const [error, setError] = useState(null);
+    const userId = localStorage.getItem('userId');
+
+    
 
     useEffect(() => {
         // Remplace l'ID par le bon ID du secrétaire à récupérer
-        const secretaryId = 1; // Exemple d'ID
-        fetch(`https://localhost:8000/secretary/account/api_secretary/${secretaryId}`)
+        // Exemple d'ID
+        fetch(`https://localhost:8000/secretary/account/api_secretary/${userId}`)
             .then(response => response.json())
             .then(data => {
                 if (data.error) {

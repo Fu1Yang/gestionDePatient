@@ -15,6 +15,7 @@ class ConnexionType extends AbstractType
             ->add('idUser')
             ->add('passworduser')
             ->add('role')
+            ->add('secretary_id')
         ;
     }
 
