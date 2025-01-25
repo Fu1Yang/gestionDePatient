@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HistoryRdv index{% endblock %}
+
+{% block body %}
+    <h1>HistoryRdv index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Horaires</th>
+                <th>Motif</th>
+                <th>NomPatient</th>
+                <th>ConclusionDuMedecin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for history_rdv in history_rdvs %}
+            <tr>
+                <td>{{ history_rdv.id }}</td>
+                <td>{{ history_rdv.date }}</td>
+                <td>{{ history_rdv.horaires }}</td>
+                <td>{{ history_rdv.motif }}</td>
+                <td>{{ history_rdv.nomPatient }}</td>
+                <td>{{ history_rdv.conclusionDuMedecin }}</td>
+                <td>
+                    <a href="{{ path('app_history_rdv_show', {'id': history_rdv.id}) }}">show</a>
+                    <a href="{{ path('app_history_rdv_edit', {'id': history_rdv.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_history_rdv_new') }}">Create new</a>
+{% endblock %}

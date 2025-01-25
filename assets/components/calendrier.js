@@ -4,7 +4,7 @@ const Planning = ()=> {
     return(
         <>
         <div id='title'>
-            <h1>Historique des rdv</h1>
+            <h1>Les Rendez-vous aujourd'hui</h1>
         </div>
         <div id='array'>
             <table>
@@ -35,7 +35,7 @@ const Planning = ()=> {
                     <tr>
                         <th scope='row'>Le 03/03/2025</th>
                         <td>13h00</td>
-                        <td>resultat colocospie</td>
+                        <td>Resultat colocospie</td>
                         <td>Xiong laura</td>
                         <td><button>Annuler le rdv</button></td>
                     </tr>

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HistoryRdv{% endblock %}
+
+{% block body %}
+    <h1>HistoryRdv</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ history_rdv.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ history_rdv.date }}</td>
+            </tr>
+            <tr>
+                <th>Horaires</th>
+                <td>{{ history_rdv.horaires }}</td>
+            </tr>
+            <tr>
+                <th>Motif</th>
+                <td>{{ history_rdv.motif }}</td>
+            </tr>
+            <tr>
+                <th>NomPatient</th>
+                <td>{{ history_rdv.nomPatient }}</td>
+            </tr>
+            <tr>
+                <th>ConclusionDuMedecin</th>
+                <td>{{ history_rdv.conclusionDuMedecin }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_history_rdv_index') }}">back to list</a>
+
+    <a href="{{ path('app_history_rdv_edit', {'id': history_rdv.id}) }}">edit</a>
+
+    {{ include('history_rdv/_delete_form.html.twig') }}
+{% endblock %}
