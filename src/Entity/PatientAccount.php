@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PatientAccountRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PatientAccountRepository::class)]
@@ -33,6 +35,17 @@ class PatientAccount
 
     #[ORM\ManyToOne(inversedBy: 'patient_id')]
     private ?Connexion $connexion = null;
+
+    /**
+     * @var Collection<int, HistoryRdv>
+     */
+    #[ORM\OneToMany(targetEntity: HistoryRdv::class, mappedBy: 'id_history')]
+    private Collection $historyRdvs;
+
+    public function __construct()
+    {
+        $this->historyRdvs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +132,36 @@ class PatientAccount
     public function setConnexion(?Connexion $connexion): static
     {
         $this->connexion = $connexion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HistoryRdv>
+     */
+    public function getHistoryRdvs(): Collection
+    {
+        return $this->historyRdvs;
+    }
+
+    public function addHistoryRdv(HistoryRdv $historyRdv): static
+    {
+        if (!$this->historyRdvs->contains($historyRdv)) {
+            $this->historyRdvs->add($historyRdv);
+            $historyRdv->setIdHistory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoryRdv(HistoryRdv $historyRdv): static
+    {
+        if ($this->historyRdvs->removeElement($historyRdv)) {
+            // set the owning side to null (unless already changed)
+            if ($historyRdv->getIdHistory() === $this) {
+                $historyRdv->setIdHistory(null);
+            }
+        }
 
         return $this;
     }
